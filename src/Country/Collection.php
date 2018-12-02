@@ -8,10 +8,10 @@ namespace Numverify\Country;
 class Collection implements \Iterator, \Countable, \JsonSerializable
 {
     /** @var Country[] */
-    private $countriesByCountryCode;
+    private $countriesByCountryCode = [];
 
     /** @var Country[] */
-    private $countriesByName;
+    private $countriesByName = [];
 
     /**
      * Collection constructor
