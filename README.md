@@ -3,9 +3,9 @@ Numverify API Client Library for PHP
 
 Numverify phone number validation and country API client library for PHP.
 
-[![Coverage Status](https://coveralls.io/repos/github/markrogoyski/ipv4-subnet-calculator-php/badge.svg?branch=master)](https://coveralls.io/github/markrogoyski/ipv4-subnet-calculator-php?branch=master)
-[![Build Status](https://travis-ci.org/markrogoyski/ipv4-subnet-calculator-php.svg?branch=master)](https://travis-ci.org/markrogoyski/ipv4-subnet-calculator-php)
-[![License](https://poser.pugx.org/markrogoyski/math-php/license)](https://packagist.org/packages/markrogoyski/ipv4-subnet-calculator-php)
+[![Coverage Status](https://coveralls.io/repos/github/markrogoyski/numverify-api-client-php/badge.svg?branch=master)](https://coveralls.io/github/markrogoyski/numverify-api-client-php?branch=master)
+[![Build Status](https://travis-ci.org/markrogoyski/numverify-api-client-php.svg?branch=master)](https://travis-ci.org/markrogoyski/numverify-api-client-php)
+[![License](https://poser.pugx.org/markrogoyski/math-php/license)](https://packagist.org/packages/markrogoyski/numverify-api-client-php)
 
 Features
 --------
@@ -154,7 +154,7 @@ $ cd tests
 $ phpunit
 ```
 
-[![Coverage Status](https://coveralls.io/repos/github/markrogoyski/ipv4-subnet-calculator-php/badge.svg?branch=master)](https://coveralls.io/github/markrogoyski/ipv4-subnet-calculator-php?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/markrogoyski/numverify-api-client-php/badge.svg?branch=master)](https://coveralls.io/github/markrogoyski/numverify-api-client-php?branch=master)
 
 Standards
 ---------
