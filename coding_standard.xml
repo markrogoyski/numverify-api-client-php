@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ruleset name="Numverify-API-Client">
+ <description>The coding standard for Numverify-API-Client.</description>
+
+ <rule ref="PSR2">
+  <!-- Welcome to the future where we have HD wide-screen monitors -->
+  <exclude name="Generic.Files.LineLength.TooLong"/>
+ </rule>
+
+</ruleset>
