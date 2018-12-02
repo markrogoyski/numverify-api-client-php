@@ -93,7 +93,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      *
      * @return string
      */
-    public function key(): string
+    public function key()
     {
         return key($this->countriesByCountryCode);
     }

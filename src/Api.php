@@ -42,7 +42,7 @@ class Api
      *
      * @return PhoneNumberInterface|PhoneNumber\ValidPhoneNumber|PhoneNumber\InvalidPhoneNumber
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \RuntimeException
      */
     public function validatePhoneNumber(string $phoneNumber): PhoneNumberInterface
     {
@@ -67,7 +67,7 @@ class Api
      *
      * @return Country\Collection
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \RuntimeException
      */
     public function getCountries(): Country\Collection
     {
