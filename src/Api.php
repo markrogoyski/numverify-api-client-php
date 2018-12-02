@@ -40,7 +40,7 @@ class Api
      *
      * @param string $phoneNumber
      *
-     * @return PhoneNumber\ValidPhoneNumber|PhoneNumber\InvalidPhoneNumber
+     * @return PhoneNumberInterface|PhoneNumber\ValidPhoneNumber|PhoneNumber\InvalidPhoneNumber
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
