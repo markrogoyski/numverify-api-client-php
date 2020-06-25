@@ -35,7 +35,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      *
      * @return Country|null
      */
-    public function findByCountryCode(string $countryCode)
+    public function findByCountryCode(string $countryCode): ?Country
     {
         return $this->countriesByCountryCode[$countryCode] ?? null;
     }
@@ -47,7 +47,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      *
      * @return Country|null
      */
-    public function findByCountryName(string $countryName)
+    public function findByCountryName(string $countryName): ?Country
     {
         return $this->countriesByName[$countryName] ?? null;
     }
