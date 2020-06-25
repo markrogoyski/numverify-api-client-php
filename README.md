@@ -29,7 +29,7 @@ Setup
 ```javascript
 {
   "require": {
-      "markrogoyski/numverify-api-client-php": "1.*"
+      "markrogoyski/numverify-api-client-php": "2.*"
   }
 }
 ```
@@ -50,11 +50,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 Alternatively, use composer on the command line to require and install Numverify API Client Library:
 
 ```
-$ php composer.phar require markrogoyski/numverify-api-client-php:1.*
+$ php composer.phar require markrogoyski/numverify-api-client-php:2.*
 ```
 
 ### Minimum Requirements
- * PHP 7.0
+ * PHP 7.1
+ 
+ Note: For PHP 7.0, use v1.0 (require markrogoyski/numverify-api-client-php":2.*)
 
 Usage
 -----
