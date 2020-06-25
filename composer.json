@@ -5,7 +5,7 @@
   "keywords": ["numverify", "api", "client", "phone number", "carrier lookup", "validate phone number", "country codes", "dialing codes"],
   "homepage": "https://github.com/markrogoyski/numverify-api-client-php/",
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.2.0",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^6.0"
   },

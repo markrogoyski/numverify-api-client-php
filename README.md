@@ -54,9 +54,9 @@ $ php composer.phar require markrogoyski/numverify-api-client-php:2.*
 ```
 
 ### Minimum Requirements
- * PHP 7.1
+ * PHP 7.2
  
- Note: For PHP 7.0, use v1.0 (require markrogoyski/numverify-api-client-php":2.*)
+ Note: For PHP 7.0 and 7.1, use v1.0 (require markrogoyski/numverify-api-client-php":1.*)
 
 Usage
 -----
