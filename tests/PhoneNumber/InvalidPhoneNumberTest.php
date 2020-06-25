@@ -113,8 +113,8 @@ class InvalidPhoneNumberTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    const VALID  = false;
-    const NUMBER = '14158586273';
+    private const VALID  = false;
+    private const NUMBER = '14158586273';
 
     /** @var object */
     private $validatedPhoneNumberData;

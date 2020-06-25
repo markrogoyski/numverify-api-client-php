@@ -75,7 +75,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
     /**
      * Iterator interface
      */
-    public function rewind()
+    public function rewind(): void
     {
         reset($this->countriesByCountryCode);
     }
@@ -103,7 +103,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
     /**
      * Iterator interface
      */
-    public function next()
+    public function next(): void
     {
         next($this->countriesByCountryCode);
     }

@@ -6,7 +6,7 @@ use Numverify;
 
 class ApiTest extends \PHPUnit\Framework\TestCase
 {
-    const ACCESS_KEY = 'SomeAccessKey';
+    private const ACCESS_KEY = 'SomeAccessKey';
 
     /* ************** *
      * API TEST CASES

@@ -40,7 +40,7 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
     /** @var string */
     private $lineType;
 
-    const FIELDS = [
+    private const FIELDS = [
         'valid', 'number', 'local_format', 'international_format', 'country_prefix', 'country_code', 'country_name', 'location', 'carrier', 'line_type',
     ];
 
@@ -213,7 +213,7 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
      *
      * @throws NumverifyApiResponseException
      */
-    private function verifyPhoneNumberData(\stdClass $phoneNumberData)
+    private function verifyPhoneNumberData(\stdClass $phoneNumberData): void
     {
         foreach (self::FIELDS as $field) {
             if (!isset($phoneNumberData->$field)) {

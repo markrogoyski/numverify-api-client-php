@@ -73,7 +73,7 @@ class NumverifyApiFailureException extends \RuntimeException
      *
      * @return string
      */
-    private function parseMessageFromBody(string $jsonBody)
+    private function parseMessageFromBody(string $jsonBody): string
     {
         $body = json_decode($jsonBody);
 

@@ -14,8 +14,8 @@ use Numverify\PhoneNumber\PhoneNumberInterface;
  */
 class Api
 {
-    const HTTP_URL  = 'http://apilayer.net/api';
-    const HTTPS_URL = 'http://apilayer.net/api';
+    private const HTTP_URL  = 'http://apilayer.net/api';
+    private const HTTPS_URL = 'http://apilayer.net/api';
 
     /** @var string API access key */
     private $accessKey;
@@ -116,7 +116,7 @@ class Api
      *
      * @throws NumverifyApiFailureException if the response is non 200 or success field is false
      */
-    private function validateResponse(\Psr\Http\Message\ResponseInterface $response)
+    private function validateResponse(\Psr\Http\Message\ResponseInterface $response): void
     {
         if ($response->getStatusCode() !== 200) {
             throw new NumverifyApiFailureException($response);

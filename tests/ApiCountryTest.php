@@ -8,7 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ApiCountryTest extends \PHPUnit\Framework\TestCase
 {
-    const ACCESS_KEY = 'SomeAccessKey';
+    private const ACCESS_KEY = 'SomeAccessKey';
 
     /* ********************** *
      * API SUCCESS TEST CASES

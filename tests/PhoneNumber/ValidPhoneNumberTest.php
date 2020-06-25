@@ -153,16 +153,16 @@ class ValidPhoneNumberTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    const VALID                = true;
-    const NUMBER               = '14158586273';
-    const LOCAL_FORMAT         = '4158586273';
-    const INTERNATIONAL_FORMAT = '+14158586273';
-    const COUNTRY_PREFIX       = '+1';
-    const COUNTRY_CODE         = 'US';
-    const COUNTRY_NAME         = 'United States of America';
-    const LOCATION             = 'Novato';
-    const CARRIER              = 'AT&T Mobility LLC';
-    const LINE_TYPE            = 'mobile';
+    private const VALID                = true;
+    private const NUMBER               = '14158586273';
+    private const LOCAL_FORMAT         = '4158586273';
+    private const INTERNATIONAL_FORMAT = '+14158586273';
+    private const COUNTRY_PREFIX       = '+1';
+    private const COUNTRY_CODE         = 'US';
+    private const COUNTRY_NAME         = 'United States of America';
+    private const LOCATION             = 'Novato';
+    private const CARRIER              = 'AT&T Mobility LLC';
+    private const LINE_TYPE            = 'mobile';
 
     /** @var object */
     private $validatedPhoneNumberData;

@@ -62,7 +62,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
      * TEST DATA
      * ********* */
 
-    const COUNTRY_CODE  = 'US';
-    const COUNTRY_NAME  = 'United States';
-    const DIALLING_CODE = '+1';
+    private const COUNTRY_CODE  = 'US';
+    private const COUNTRY_NAME  = 'United States';
+    private const DIALLING_CODE = '+1';
 }

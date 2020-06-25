@@ -52,9 +52,9 @@ class NumverifyApiFailureExceptionTest extends \PHPUnit\Framework\TestCase
         $this->assertSame(self::BODY, $body);
     }
 
-    const STATUS_CODE   = 500;
-    const REASON_PHRASE = 'Internal Server Error';
-    const BODY          = 'server error';
+    private const STATUS_CODE   = 500;
+    private const REASON_PHRASE = 'Internal Server Error';
+    private const BODY          = 'server error';
 
     /** @var \Psr\Http\Message\ResponseInterface|MockObject */
     private $response;

@@ -16,7 +16,7 @@ class InvalidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
     /** @var string */
     private $number;
 
-    const FIELDS = ['valid', 'number'];
+    private const FIELDS = ['valid', 'number'];
 
     /**
      * InvalidPhoneNumber constructor
@@ -87,7 +87,7 @@ class InvalidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
      *
      * @throws NumverifyApiResponseException
      */
-    private function verifyPhoneNumberData(\stdClass $phoneNumberData)
+    private function verifyPhoneNumberData(\stdClass $phoneNumberData): void
     {
         foreach (self::FIELDS as $field) {
             if (!isset($phoneNumberData->$field)) {

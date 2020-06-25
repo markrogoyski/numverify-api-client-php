@@ -6,7 +6,7 @@ use Numverify;
 
 class ApiPhoneNumberTest extends \PHPUnit\Framework\TestCase
 {
-    const ACCESS_KEY = 'SomeAccessKey';
+    private const ACCESS_KEY = 'SomeAccessKey';
 
     /* ********************** *
      * API SUCCESS TEST CASES
