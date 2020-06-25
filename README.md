@@ -19,6 +19,8 @@ Features
    * List of countries
    * Country names, country codes, dialing codes
    
+Numverify API documentation: https://numverify.com/documentation
+
 Setup
 -----
 
@@ -27,7 +29,7 @@ Setup
 ```javascript
 {
   "require": {
-      "markrogoyski/numverify-api-client-php": "1.*"
+      "markrogoyski/numverify-api-client-php": "0.*"
   }
 }
 ```
@@ -48,7 +50,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 Alternatively, use composer on the command line to require and install Numverify API Client Library:
 
 ```
-$ php composer.phar require markrogoyski/numverify-ali-client-php:0.*
+$ php composer.phar require markrogoyski/numverify-api-client-php:0.*
 ```
 
 ### Minimum Requirements
