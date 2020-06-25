@@ -9,7 +9,7 @@ lint :
 	vendor/bin/phpcs --standard=coding_standard.xml --ignore=vendor .
 
 static :
-	vendor/bin/phpstan analyze --level max src/ tests/
+	vendor/bin/phpstan analyze --level max src/
 	vendor/bin/phpmd src/ text cleancode,codesize,design,unusedcode,naming
 
 coverage :
