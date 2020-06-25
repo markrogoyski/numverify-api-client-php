@@ -2,9 +2,14 @@
 <ruleset name="Numverify-API-Client">
  <description>The coding standard for Numverify-API-Client.</description>
 
- <rule ref="PSR2">
+ <config name="php_version" value="70000"/>
+
+ <rule ref="PSR12">
   <!-- Welcome to the future where we have HD wide-screen monitors -->
   <exclude name="Generic.Files.LineLength.TooLong"/>
+
+  <!-- Numverify-API-Client supports PHP 7.0 which does not have constant visibility declarations yet -->
+  <exclude name="PSR12.Properties.ConstantVisibility.NotFound"/>
  </rule>
 
 </ruleset>

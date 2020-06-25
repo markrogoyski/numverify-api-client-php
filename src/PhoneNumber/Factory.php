@@ -1,4 +1,5 @@
 <?php
+
 namespace Numverify\PhoneNumber;
 
 /**

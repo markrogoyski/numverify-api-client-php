@@ -6,7 +6,7 @@ tests :
 	vendor/bin/phpunit tests/ --configuration=tests/phpunit.xml
 
 lint :
-	vendor/bin/phpcs --standard=coding_standard.xml --ignore=vendor .
+	vendor/bin/phpcs --standard=coding_standard.xml --runtime-set php_version 70033 --ignore=vendor .
 
 static :
 	vendor/bin/phpstan analyze --level max src/
