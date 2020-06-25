@@ -4,6 +4,7 @@ namespace Numverify\Country;
 /**
  * Country Collection
  * Role: Collection of callable countries
+ * @implements \Iterator<Country>
  */
 class Collection implements \Iterator, \Countable, \JsonSerializable
 {
@@ -63,7 +64,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
     /**
      * JsonSerializable interface
      *
-     * @return array
+     * @return object[]
      */
     public function jsonSerialize(): array
     {

@@ -74,7 +74,7 @@ class Country implements \JsonSerializable
     /**
      * JsonSerializable interface
      *
-     * @return array
+     * @return string[]
      */
     public function jsonSerialize(): array
     {

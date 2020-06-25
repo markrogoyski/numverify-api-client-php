@@ -177,7 +177,7 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
     /**
      * JsonSerialize interface
      *
-     * @return array
+     * @return mixed[]
      */
     public function jsonSerialize(): array
     {
@@ -198,7 +198,7 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
     /**
      * Debug info
      *
-     * @return array
+     * @return mixed[]
      */
     public function __debugInfo(): array
     {
