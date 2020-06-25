@@ -50,7 +50,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 Alternatively, use composer on the command line to require and install Numverify API Client Library:
 
 ```
-$ php composer.phar require markrogoyski/numverify-ali-client-php:0.*
+$ php composer.phar require markrogoyski/numverify-api-client-php:0.*
 ```
 
 ### Minimum Requirements
