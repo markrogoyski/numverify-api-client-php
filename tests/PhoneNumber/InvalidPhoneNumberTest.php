@@ -81,8 +81,8 @@ class InvalidPhoneNumberTest extends \PHPUnit\Framework\TestCase
         $debugInfo = print_r($phoneNumber, true);
 
         // Then
-        $this->assertContains('valid', $debugInfo);
-        $this->assertContains('number', $debugInfo);
+        $this->assertStringContainsString('valid', $debugInfo);
+        $this->assertStringContainsString('number', $debugInfo);
     }
 
     /**
@@ -119,7 +119,7 @@ class InvalidPhoneNumberTest extends \PHPUnit\Framework\TestCase
     /** @var object */
     private $validatedPhoneNumberData;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->validatedPhoneNumberData = (object) [
             'valid'                => self::VALID,

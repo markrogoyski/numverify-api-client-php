@@ -105,16 +105,16 @@ class ValidPhoneNumberTest extends \PHPUnit\Framework\TestCase
         $debugInfo = print_r($phoneNumber, true);
 
         // Then
-        $this->assertContains('valid', $debugInfo);
-        $this->assertContains('number', $debugInfo);
-        $this->assertContains('localFormat', $debugInfo);
-        $this->assertContains('internationalFormat', $debugInfo);
-        $this->assertContains('countryPrefix', $debugInfo);
-        $this->assertContains('countryCode', $debugInfo);
-        $this->assertContains('countryName', $debugInfo);
-        $this->assertContains('location', $debugInfo);
-        $this->assertContains('carrier', $debugInfo);
-        $this->assertContains('lineType', $debugInfo);
+        $this->assertStringContainsString('valid', $debugInfo);
+        $this->assertStringContainsString('number', $debugInfo);
+        $this->assertStringContainsString('localFormat', $debugInfo);
+        $this->assertStringContainsString('internationalFormat', $debugInfo);
+        $this->assertStringContainsString('countryPrefix', $debugInfo);
+        $this->assertStringContainsString('countryCode', $debugInfo);
+        $this->assertStringContainsString('countryName', $debugInfo);
+        $this->assertStringContainsString('location', $debugInfo);
+        $this->assertStringContainsString('carrier', $debugInfo);
+        $this->assertStringContainsString('lineType', $debugInfo);
     }
 
     /**
@@ -167,7 +167,7 @@ class ValidPhoneNumberTest extends \PHPUnit\Framework\TestCase
     /** @var object */
     private $validatedPhoneNumberData;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->validatedPhoneNumberData = (object) [
             'valid'                => self::VALID,

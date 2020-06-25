@@ -59,7 +59,7 @@ class NumverifyApiFailureExceptionTest extends \PHPUnit\Framework\TestCase
     /** @var \Psr\Http\Message\ResponseInterface|MockObject */
     private $response;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->response = $this->getMockBuilder(\Psr\Http\Message\ResponseInterface::class)->getMock();
         $this->response->method('getStatusCode')->willReturn(self::STATUS_CODE);

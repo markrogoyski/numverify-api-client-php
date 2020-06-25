@@ -158,7 +158,7 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     /**
      * Set up countries
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->countryUs = new Country('US', 'United States', '+1');
         $this->countryGb = new Country('GB', 'United Kingdom', '+44');
