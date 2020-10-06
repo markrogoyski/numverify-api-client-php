@@ -167,7 +167,7 @@ Numverify API Client Library for PHP conforms to the following standards:
 
  * PSR-1 - Basic coding standard (http://www.php-fig.org/psr/psr-1/)
  * PSR-2 - Coding style guide (http://www.php-fig.org/psr/psr-2/)
- * PSR-4 - Autoloader (http://www.php-fig.org/psr/psr-4/)
+ * PSR-12 - Extended coding style guide (http://www.php-fig.org/psr/psr-12/)
 
 License
 -------
