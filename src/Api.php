@@ -40,6 +40,7 @@ class Api
      * Validate a phone number
      *
      * @param string $phoneNumber
+     * @param string $countryCode (Optional) Use to provide a phone number in a local format (non E.164)
      *
      * @return PhoneNumberInterface|PhoneNumber\ValidPhoneNumber|PhoneNumber\InvalidPhoneNumber
      *
@@ -47,15 +48,19 @@ class Api
      */
     public function validatePhoneNumber(string $phoneNumber, string $countryCode = ''): PhoneNumberInterface
     {
+        $query = [
+            'access_key' => $this->accessKey,
+            'number'     => $phoneNumber,
+        ];
+        if (strlen($countryCode) > 0) {
+            $query['country_code'] = $countryCode;
+        }
+
         $result = $this->client->request(
             'GET',
             '/validate',
             [
-                'query' => [
-                    'access_key' => $this->accessKey,
-                    'number'     => $phoneNumber,
-                     'country_code' => $countryCode
-                ]
+                'query' => $query
             ]
         );
         $this->validateResponse($result);
