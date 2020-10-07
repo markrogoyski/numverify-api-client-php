@@ -50,6 +50,44 @@ class ApiPhoneNumberTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @testCase     validatePhoneNumber success - valid phone number using local format and country code
+     * @dataProvider dataProviderForHttp
+     * @param        bool $useHttps
+     */
+    public function testValidatePhoneNumberValidPhoneNumberUsingLocalFormatAndCountryCode(bool $useHttps)
+    {
+        // Given
+        $response = $this->getMockBuilder(\Psr\Http\Message\ResponseInterface::class)->getMock();
+        $response->method('getStatusCode')->willReturn(200);
+        $response->method('getBody')
+            ->willReturn('{
+                "valid": true,
+                "number": "14158586273",
+                "local_format": "4158586273",
+                "international_format": "+14158586273",
+                "country_prefix": "+1",
+                "country_code": "US",
+                "country_name": "United States of America",
+                "location": "Novato",
+                "carrier": "AT&T Mobility LLC",
+                "line_type": "mobile"
+            }');
+        $client = $this->createPartialMock(\GuzzleHttp\Client::class, ['request']);
+        $client->method('request')->willReturn($response);
+
+        // And
+        $api = new Numverify\Api(self::ACCESS_KEY, $useHttps, $client);
+
+        // When
+        $phoneNumberToValidate = '4158586273';
+        $countryCode = 'US';
+        $phoneNumber = $api->validatePhoneNumber($phoneNumberToValidate, $countryCode);
+
+        // Then
+        $this->assertInstanceOf(Numverify\PhoneNumber\ValidPhoneNumber::class, $phoneNumber);
+    }
+
+    /**
      * @testCase     validatePhoneNumber success - invalid phone number
      * @dataProvider dataProviderForHttp
      * @param        bool $useHttps
