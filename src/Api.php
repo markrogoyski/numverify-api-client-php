@@ -45,7 +45,7 @@ class Api
      *
      * @throws \RuntimeException
      */
-    public function validatePhoneNumber(string $phoneNumber): PhoneNumberInterface
+    public function validatePhoneNumber(string $phoneNumber, string $countryCode = ''): PhoneNumberInterface
     {
         $result = $this->client->request(
             'GET',
@@ -54,6 +54,7 @@ class Api
                 'query' => [
                     'access_key' => $this->accessKey,
                     'number'     => $phoneNumber,
+                     'country_code' => $countryCode
                 ]
             ]
         );
