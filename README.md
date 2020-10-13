@@ -84,6 +84,11 @@ if ($validatedPhoneNumber->isValid()) {
     $carrier             = $validatedPhoneNumber->getCarrier();              // AT&T Mobility LLC
     $lineType            = $validatedPhoneNumber->getLineType();             // mobile
 }
+
+// Use optional country code parameter for local (non-E.164) phone numbers
+$phoneNumber = '4158586273';
+$countryCode = 'US';
+$validatedPhoneNumber = $api->validatePhoneNumber($phoneNumber, $countryCode);
  
 // PHP Interfaces
 $stringRepresentation = (string) $validatedPhoneNumber;
