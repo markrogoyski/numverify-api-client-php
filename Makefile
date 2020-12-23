@@ -1,16 +1,21 @@
-.PHONY : tests lint static report coverage
+.PHONY : tests lint style static report coverage
 
-all : tests lint static report
+all : lint tests style phpstan phpmd report
 
 tests :
 	vendor/bin/phpunit tests/ --configuration=tests/phpunit.xml
 
 lint :
-	vendor/bin/phpcs --standard=coding_standard.xml --ignore=vendor .
+	vendor/bin/parallel-lint src tests
 
-static :
+style :
+	vendor/bin/phpcs --standard=tests/coding_standard.xml --ignore=vendor -s .
+
+phpstan :
 	vendor/bin/phpstan analyze --level max src/
-	vendor/bin/phpmd src/ text cleancode,codesize,design,unusedcode,naming
+
+phpmd :
+	vendor/bin/phpmd src/ ansi cleancode,codesize,design,unusedcode,naming
 
 coverage :
 	vendor/bin/phpunit tests/ --configuration=tests/phpunit.xml --coverage-text=php://stdout
