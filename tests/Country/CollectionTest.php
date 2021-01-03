@@ -142,6 +142,39 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+    /**
+     * @test Iteration failure if manually manipulating the iterator (with elements)
+     */
+    public function testIterationCurrentFailureWithElements()
+    {
+        // Given
+        $collection = new Collection(...[$this->countryUs]);
+
+        // And
+        $collection->next();
+
+        // Then
+        $this->expectException(\LogicException::class);
+
+        // When
+        $collection->current();
+    }
+
+    /**
+     * @test Iteration failure if manually manipulating the iterator (no elements)
+     */
+    public function testIterationCurrentFailureNoElements()
+    {
+        // Given
+        $collection = new Collection(...[]);
+
+        // Then
+        $this->expectException(\LogicException::class);
+
+        // When
+        $collection->current();
+    }
+
     /* ********* *
      * TEST DATA
      * ********* */

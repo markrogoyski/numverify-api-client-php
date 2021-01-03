@@ -87,7 +87,11 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      */
     public function current(): Country
     {
-        return current($this->countriesByCountryCode);
+        $country = current($this->countriesByCountryCode);
+        if ($country === false) {
+            throw new \LogicException('Iteration error - current returned false');
+        }
+        return $country;
     }
 
     /**
