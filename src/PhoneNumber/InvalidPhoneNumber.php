@@ -8,40 +8,29 @@ use Numverify\Exception\NumverifyApiResponseException;
  * InvalidPhoneNumber
  * Role: Value object to represent a phone number that the Numverify returned as invalid
  */
-class InvalidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
+readonly class InvalidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 {
-    /** @var bool */
-    private $valid;
-
-    /** @var string */
-    private $number;
+    private bool $valid;
+    private string $number;
 
     private const FIELDS = ['valid', 'number'];
 
     /**
      * InvalidPhoneNumber constructor
-     *
-     * @param \stdClass $validatedPhoneNumber
      */
     public function __construct(\stdClass $validatedPhoneNumber)
     {
         $this->verifyPhoneNumberData($validatedPhoneNumber);
 
-        $this->valid  = boolval($validatedPhoneNumber->valid);
-        $this->number = $validatedPhoneNumber->number;
+        $this->valid  = \boolval($validatedPhoneNumber->valid);
+        $this->number = (string) $validatedPhoneNumber->number; // @phpstan-ignore cast.string
     }
 
-    /**
-     * @return bool
-     */
-    public function isValid(): bool
+    public function isValid(): false
     {
         return false;
     }
 
-    /**
-     * @return string
-     */
     public function getNumber(): string
     {
         return $this->number;
@@ -49,8 +38,6 @@ class InvalidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * String representation
-     *
-     * @return string
      */
     public function __toString(): string
     {
@@ -82,8 +69,6 @@ class InvalidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * Verify the phone number data contains the expected fields
-     *
-     * @param \stdClass $phoneNumberData
      *
      * @throws NumverifyApiResponseException
      */

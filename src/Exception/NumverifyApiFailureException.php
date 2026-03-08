@@ -7,19 +7,12 @@ namespace Numverify\Exception;
  */
 class NumverifyApiFailureException extends \RuntimeException
 {
-    /** @var int */
-    private $statusCode;
-
-    /** @var string */
-    private $reasonPhrase;
-
-    /** @var \Psr\Http\Message\StreamInterface */
-    private $body;
+    private int $statusCode;
+    private string $reasonPhrase;
+    private \Psr\Http\Message\StreamInterface $body;
 
     /**
      * NumverifyApiFailureException constructor
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
      */
     public function __construct(\Psr\Http\Message\ResponseInterface $response)
     {
@@ -27,30 +20,21 @@ class NumverifyApiFailureException extends \RuntimeException
         $this->reasonPhrase = $response->getReasonPhrase();
         $this->body         = $response->getBody();
 
-        $message = $this->parseMessageFromBody($this->body);
+        $message = $this->parseMessageFromBody((string) $this->body);
 
         parent::__construct($message);
     }
 
-    /**
-     * @return int
-     */
     public function getStatusCode(): int
     {
         return $this->statusCode;
     }
 
-    /**
-     * @return string
-     */
     public function getReasonPhrase(): string
     {
         return $this->reasonPhrase;
     }
 
-    /**
-     * @return string
-     */
     public function getBody(): string
     {
         return (string) $this->body;
@@ -68,20 +52,17 @@ class NumverifyApiFailureException extends \RuntimeException
      *         "info":"You have not supplied a valid API Access Key. [Technical Support: support@apilayer.com]"
      *     }
      * }
-     *
-     * @param string $jsonBody
-     *
-     * @return string
      */
     private function parseMessageFromBody(string $jsonBody): string
     {
-        $body = json_decode($jsonBody);
+        /** @var object{error?: object{type: string, code: int, info: string}}|null $body */
+        $body = \json_decode($jsonBody);
 
         if (!isset($body->error)) {
             return 'Unknown error - ' . $this->statusCode . ' ' . $this->getReasonPhrase();
         }
 
         $error = $body->error;
-        return sprintf('Type:%s Code:%d Info:%s', $error->type, $error->code, $error->info);
+        return \sprintf('Type:%s Code:%d Info:%s', $error->type, $error->code, $error->info);
     }
 }

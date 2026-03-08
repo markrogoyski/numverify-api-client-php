@@ -8,37 +8,18 @@ use Numverify\Exception\NumverifyApiResponseException;
  * ValidPhoneNumber
  * Role: Value object to represent a phone number that the Numverify returned as valid
  */
-class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
+readonly class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 {
-    /** @var bool */
-    private $valid;
-
-    /** @var string */
-    private $number;
-
-    /** @var string */
-    private $localFormat;
-
-    /** @var string */
-    private $internationalFormat;
-
-    /** @var string */
-    private $countryPrefix;
-
-    /** @var string */
-    private $countryCode;
-
-    /** @var string */
-    private $countryName;
-
-    /** @var string */
-    private $location;
-
-    /** @var string */
-    private $carrier;
-
-    /** @var string */
-    private $lineType;
+    private bool $valid;
+    private string $number;
+    private string $localFormat;
+    private string $internationalFormat;
+    private string $countryPrefix;
+    private string $countryCode;
+    private string $countryName;
+    private string $location;
+    private string $carrier;
+    private string $lineType;
 
     private const FIELDS = [
         'valid', 'number', 'local_format', 'international_format', 'country_prefix', 'country_code', 'country_name', 'location', 'carrier', 'line_type',
@@ -46,39 +27,33 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * ValidPhoneNumber constructor
-     *
-     * @param \stdClass $validatedPhoneNumberData
      */
     public function __construct(\stdClass $validatedPhoneNumberData)
     {
         $this->verifyPhoneNumberData($validatedPhoneNumberData);
 
-        $this->valid               = boolval($validatedPhoneNumberData->valid);
-        $this->number              = $validatedPhoneNumberData->number;
-        $this->localFormat         = $validatedPhoneNumberData->local_format;
-        $this->internationalFormat = $validatedPhoneNumberData->international_format;
-        $this->countryPrefix       = $validatedPhoneNumberData->country_prefix;
-        $this->countryCode         = $validatedPhoneNumberData->country_code;
-        $this->countryName         = $validatedPhoneNumberData->country_name;
-        $this->location            = $validatedPhoneNumberData->location;
-        $this->carrier             = $validatedPhoneNumberData->carrier;
-        $this->lineType            = $validatedPhoneNumberData->line_type;
+        $this->valid               = \boolval($validatedPhoneNumberData->valid);
+        $this->number              = (string) $validatedPhoneNumberData->number;               // @phpstan-ignore cast.string
+        $this->localFormat         = (string) $validatedPhoneNumberData->local_format;         // @phpstan-ignore cast.string
+        $this->internationalFormat = (string) $validatedPhoneNumberData->international_format; // @phpstan-ignore cast.string
+        $this->countryPrefix       = (string) $validatedPhoneNumberData->country_prefix;       // @phpstan-ignore cast.string
+        $this->countryCode         = (string) $validatedPhoneNumberData->country_code;         // @phpstan-ignore cast.string
+        $this->countryName         = (string) $validatedPhoneNumberData->country_name;         // @phpstan-ignore cast.string
+        $this->location            = (string) $validatedPhoneNumberData->location;             // @phpstan-ignore cast.string
+        $this->carrier             = (string) $validatedPhoneNumberData->carrier;              // @phpstan-ignore cast.string
+        $this->lineType            = (string) $validatedPhoneNumberData->line_type;            // @phpstan-ignore cast.string
     }
 
     /**
      * Is the phone number valid?
-     *
-     * @return bool
      */
-    public function isValid(): bool
+    public function isValid(): true
     {
         return true;
     }
 
     /**
      * Get phone number
-     *
-     * @return string
      */
     public function getNumber(): string
     {
@@ -87,8 +62,6 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * Get local format
-     *
-     * @return string
      */
     public function getLocalFormat(): string
     {
@@ -97,8 +70,6 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * Get international format
-     *
-     * @return string
      */
     public function getInternationalFormat(): string
     {
@@ -107,8 +78,6 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * Get country prefix
-     *
-     * @return string
      */
     public function getCountryPrefix(): string
     {
@@ -117,8 +86,6 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * Get country code
-     *
-     * @return string
      */
     public function getCountryCode(): string
     {
@@ -127,8 +94,6 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * Get country name
-     *
-     * @return string
      */
     public function getCountryName(): string
     {
@@ -137,8 +102,6 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * Get location
-     *
-     * @return string
      */
     public function getLocation(): string
     {
@@ -147,8 +110,6 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * Get carrier
-     *
-     * @return string
      */
     public function getCarrier(): string
     {
@@ -157,8 +118,6 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * Get line type
-     *
-     * @return string
      */
     public function getLineType(): string
     {
@@ -167,8 +126,6 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * String representation
-     *
-     * @return string
      */
     public function __toString(): string
     {
@@ -208,8 +165,6 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
 
     /**
      * Verify the phone number data contains the expected fields
-     *
-     * @param \stdClass $phoneNumberData
      *
      * @throws NumverifyApiResponseException
      */

@@ -2,6 +2,7 @@
 
 namespace Numverify\Tests;
 
+use GuzzleHttp\Psr7\Utils;
 use Numverify;
 use Numverify\Country;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -92,14 +93,14 @@ class ApiCountryTest extends \PHPUnit\Framework\TestCase
         $response = $this->getMockBuilder(\Psr\Http\Message\ResponseInterface::class)->getMock();
         $response->method('getStatusCode')->willReturn(200);
         $response->method('getBody')
-            ->willReturn('{
+            ->willReturn(Utils::streamFor('{
                 "success":false,
                 "error":{
                     "code":101,
                     "type":"invalid_access_key",
                     "info":"You have not supplied a valid API Access Key. [Technical Support: support@apilayer.com]"
                 }
-            }');
+            }'));
         $client = $this->createPartialMock(\GuzzleHttp\Client::class, ['request']);
         $client->method('request')->willReturn($response);
 
@@ -126,7 +127,7 @@ class ApiCountryTest extends \PHPUnit\Framework\TestCase
         $response = $this->getMockBuilder(\Psr\Http\Message\ResponseInterface::class)->getMock();
         $response->method('getStatusCode')->willReturn(500);
         $response->method('getReasonPhrase')->willReturn('Internal Server Error');
-        $response->method('getBody')->willReturn('server error');
+        $response->method('getBody')->willReturn(Utils::streamFor('server error'));
         $client = $this->createPartialMock(\GuzzleHttp\Client::class, ['request']);
         $client->method('request')->willReturn($response);
 
@@ -148,7 +149,7 @@ class ApiCountryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function dataProviderForHttp(): array
+    public static function dataProviderForHttp(): array
     {
         return [
             [true],
@@ -163,18 +164,18 @@ class ApiCountryTest extends \PHPUnit\Framework\TestCase
     /**
      * Given a client
      *
-     * @return \Psr\Http\Message\ResponseInterface|MockObject
+     * @return \GuzzleHttp\Client|MockObject
      */
     private function aClient()
     {
         $response = $this->getMockBuilder(\Psr\Http\Message\ResponseInterface::class)->getMock();
         $response->method('getStatusCode')->willReturn(200);
         $response->method('getBody')
-            ->willReturn('{
+            ->willReturn(Utils::streamFor('{
                 "JP":{"country_name":"Japan","dialling_code":"+81"},
                 "GB":{"country_name":"United Kingdom","dialling_code":"+44"},
                 "US":{"country_name":"United States","dialling_code":"+1"}
-            }');
+            }'));
         $client = $this->createPartialMock(\GuzzleHttp\Client::class, ['request']);
         $client->method('request')->willReturn($response);
 

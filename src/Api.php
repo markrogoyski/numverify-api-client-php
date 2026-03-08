@@ -2,11 +2,6 @@
 
 namespace Numverify;
 
-use Numverify\Country;
-use Numverify\Exception\NumverifyApiFailureException;
-use Numverify\PhoneNumber;
-use Numverify\PhoneNumber\PhoneNumberInterface;
-
 /**
  * Numverify API
  *  - validatePhoneNumber
@@ -15,13 +10,10 @@ use Numverify\PhoneNumber\PhoneNumberInterface;
 class Api
 {
     private const HTTP_URL  = 'http://apilayer.net/api';
-    private const HTTPS_URL = 'http://apilayer.net/api';
+    private const HTTPS_URL = 'https://apilayer.net/api';
 
-    /** @var string API access key */
-    private $accessKey;
-
-    /** @var \GuzzleHttp\ClientInterface */
-    private $client;
+    private string $accessKey;
+    private \GuzzleHttp\ClientInterface $client;
 
     /**
      * Api constructor
@@ -30,7 +22,7 @@ class Api
      * @param bool                             $useHttps   Optional flag to determine if API calls should use http or https
      * @param \GuzzleHttp\ClientInterface|null $guzzle     Optional parameter to provide your own Guzzle client
      */
-    public function __construct(string $accessKey, bool $useHttps = false, \GuzzleHttp\ClientInterface $guzzle = null)
+    public function __construct(string $accessKey, bool $useHttps = false, ?\GuzzleHttp\ClientInterface $guzzle = null)
     {
         $this->accessKey = $accessKey;
         $this->client    = $guzzle ?? new \GuzzleHttp\Client(['base_uri' => $this->getUrl($useHttps)]);
@@ -39,20 +31,17 @@ class Api
     /**
      * Validate a phone number
      *
-     * @param string $phoneNumber
-     * @param string $countryCode (Optional) Use to provide a phone number in a local format (non E.164)
-     *
-     * @return PhoneNumberInterface|PhoneNumber\ValidPhoneNumber|PhoneNumber\InvalidPhoneNumber
+     * @return PhoneNumber\PhoneNumberInterface
      *
      * @throws \RuntimeException
      */
-    public function validatePhoneNumber(string $phoneNumber, string $countryCode = ''): PhoneNumberInterface
+    public function validatePhoneNumber(string $phoneNumber, string $countryCode = ''): PhoneNumber\PhoneNumberInterface
     {
         $query = [
             'access_key' => $this->accessKey,
             'number'     => $phoneNumber,
         ];
-        if (strlen($countryCode) > 0) {
+        if (\strlen($countryCode) > 0) {
             $query['country_code'] = $countryCode;
         }
 
@@ -65,14 +54,13 @@ class Api
         );
         $this->validateResponse($result);
 
-        $body = json_decode($result->getBody());
+        /** @var \stdClass $body */
+        $body = \json_decode((string) $result->getBody());
         return PhoneNumber\Factory::create($body);
     }
 
     /**
      * Get list of countries
-     *
-     * @return Country\Collection
      *
      * @throws \RuntimeException
      */
@@ -89,48 +77,45 @@ class Api
         );
         $this->validateResponse($result);
 
-        $body = json_decode($result->getBody(), true);
+        /** @var array<string, array{country_name: string, dialling_code: string}> $body */
+        $body = \json_decode((string) $result->getBody(), true);
 
-        $countries = array_map(
-            function (array $country, string $countryCode) {
+        $countries = \array_map(
+            function (array $country, string $countryCode): Country\Country {
                 return new Country\Country($countryCode, $country['country_name'], $country['dialling_code']);
             },
             $body,
-            array_keys($body)
+            \array_keys($body)
         );
         return new Country\Collection(...$countries);
     }
 
     /**
      * Get the URL to use for API calls
-     *
-     * @param bool $useHttp
-     *
-     * @return string
      */
     private function getUrl(bool $useHttp): string
     {
-        return $useHttp
-            ? self::HTTPS_URL
-            : self::HTTP_URL;
+        return match ($useHttp) {
+            true  => self::HTTPS_URL,
+            false => self::HTTP_URL,
+        };
     }
 
     /**
      * Validate the response
      *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     *
-     * @throws NumverifyApiFailureException if the response is non 200 or success field is false
+     * @throws Exception\NumverifyApiFailureException if the response is non 200 or success field is false
      */
     private function validateResponse(\Psr\Http\Message\ResponseInterface $response): void
     {
         if ($response->getStatusCode() !== 200) {
-            throw new NumverifyApiFailureException($response);
+            throw new Exception\NumverifyApiFailureException($response);
         }
 
-        $body = json_decode($response->getBody());
-        if (isset($body->success) && $body->success == false) {
-            throw new NumverifyApiFailureException($response);
+        /** @var \stdClass|null $body */
+        $body = \json_decode((string) $response->getBody());
+        if (isset($body->success) && $body->success === false) {
+            throw new Exception\NumverifyApiFailureException($response);
         }
     }
 }

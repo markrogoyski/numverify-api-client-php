@@ -63,7 +63,7 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function dataProviderForCountryCounts(): array
+    public static function dataProviderForCountryCounts(): array
     {
         return [
             'zero' => [
@@ -101,13 +101,13 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
         $collection = new Collection(...[$this->countryUs, $this->countryGb, $this->countryJp]);
 
         // When
-        $json = json_encode($collection);
+        $json = \json_encode($collection);
 
         // Then
-        $object = json_decode($json);
-        $this->assertObjectHasAttribute('US', $object);
-        $this->assertObjectHasAttribute('GB', $object);
-        $this->assertObjectHasAttribute('JP', $object);
+        $object = \json_decode($json);
+        $this->assertTrue(\property_exists($object, 'US'));
+        $this->assertTrue(\property_exists($object, 'GB'));
+        $this->assertTrue(\property_exists($object, 'JP'));
 
         // And
         $this->assertEquals('US', $object->US->countryCode);

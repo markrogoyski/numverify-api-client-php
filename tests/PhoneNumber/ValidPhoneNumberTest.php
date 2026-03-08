@@ -77,10 +77,10 @@ class ValidPhoneNumberTest extends \PHPUnit\Framework\TestCase
         $phoneNumber = new ValidPhoneNumber($this->validatedPhoneNumberData);
 
         // When
-        $json = json_encode($phoneNumber);
+        $json = \json_encode($phoneNumber);
 
         // Then
-        $object = json_decode($json);
+        $object = \json_decode($json);
         $this->assertSame(self::VALID, $object->valid);
         $this->assertSame(self::NUMBER, $object->number);
         $this->assertSame(self::LOCAL_FORMAT, $object->localFormat);
@@ -102,7 +102,7 @@ class ValidPhoneNumberTest extends \PHPUnit\Framework\TestCase
         $phoneNumber = new ValidPhoneNumber($this->validatedPhoneNumberData);
 
         // When
-        $debugInfo = print_r($phoneNumber, true);
+        $debugInfo = \print_r($phoneNumber, true);
 
         // Then
         $this->assertStringContainsString('valid', $debugInfo);
@@ -137,7 +137,7 @@ class ValidPhoneNumberTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function dataProviderForFields(): array
+    public static function dataProviderForFields(): array
     {
         return [
             ['valid'],

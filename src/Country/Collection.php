@@ -10,15 +10,13 @@ namespace Numverify\Country;
 class Collection implements \Iterator, \Countable, \JsonSerializable
 {
     /** @var Country[] */
-    private $countriesByCountryCode = [];
+    private array $countriesByCountryCode = [];
 
     /** @var Country[] */
-    private $countriesByName = [];
+    private array $countriesByName = [];
 
     /**
      * Collection constructor
-     *
-     * @param Country ...$countries
      */
     public function __construct(Country ...$countries)
     {
@@ -30,10 +28,6 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
 
     /**
      * Find country by country code
-     *
-     * @param string $countryCode
-     *
-     * @return Country|null
      */
     public function findByCountryCode(string $countryCode): ?Country
     {
@@ -42,10 +36,6 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
 
     /**
      * Find country by name
-     *
-     * @param string $countryName
-     *
-     * @return Country|null
      */
     public function findByCountryName(string $countryName): ?Country
     {
@@ -54,12 +44,10 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
 
     /**
      * Countable interface
-     *
-     * @return int
      */
     public function count(): int
     {
-        return count($this->countriesByCountryCode);
+        return \count($this->countriesByCountryCode);
     }
 
     /**
@@ -77,17 +65,15 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      */
     public function rewind(): void
     {
-        reset($this->countriesByCountryCode);
+        \reset($this->countriesByCountryCode);
     }
 
     /**
      * Iterator interface
-     *
-     * @return Country
      */
     public function current(): Country
     {
-        $country = current($this->countriesByCountryCode);
+        $country = \current($this->countriesByCountryCode);
         if ($country === false) {
             throw new \LogicException('Iteration error - current returned false');
         }
@@ -96,12 +82,10 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
 
     /**
      * Iterator interface
-     *
-     * @return int|string|null
      */
-    public function key()
+    public function key(): mixed
     {
-        return key($this->countriesByCountryCode);
+        return \key($this->countriesByCountryCode);
     }
 
     /**
@@ -109,16 +93,14 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      */
     public function next(): void
     {
-        next($this->countriesByCountryCode);
+        \next($this->countriesByCountryCode);
     }
 
     /**
      * Iterator interface
-     *
-     * @return bool
      */
     public function valid(): bool
     {
-        return key($this->countriesByCountryCode) !== null;
+        return \key($this->countriesByCountryCode) !== null;
     }
 }
