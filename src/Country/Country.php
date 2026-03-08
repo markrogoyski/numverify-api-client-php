@@ -48,7 +48,7 @@ readonly class Country implements \JsonSerializable
      */
     public function __toString(): string
     {
-        return sprintf('%s: %s (%s)', $this->countryCode, $this->countryName, $this->dialingCode);
+        return \sprintf('%s: %s (%s)', $this->countryCode, $this->countryName, $this->dialingCode);
     }
 
     /**

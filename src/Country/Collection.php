@@ -47,7 +47,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      */
     public function count(): int
     {
-        return count($this->countriesByCountryCode);
+        return \count($this->countriesByCountryCode);
     }
 
     /**
@@ -65,7 +65,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      */
     public function rewind(): void
     {
-        reset($this->countriesByCountryCode);
+        \reset($this->countriesByCountryCode);
     }
 
     /**
@@ -73,7 +73,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      */
     public function current(): Country
     {
-        $country = current($this->countriesByCountryCode);
+        $country = \current($this->countriesByCountryCode);
         if ($country === false) {
             throw new \LogicException('Iteration error - current returned false');
         }
@@ -85,7 +85,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      */
     public function key(): mixed
     {
-        return key($this->countriesByCountryCode);
+        return \key($this->countriesByCountryCode);
     }
 
     /**
@@ -93,7 +93,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      */
     public function next(): void
     {
-        next($this->countriesByCountryCode);
+        \next($this->countriesByCountryCode);
     }
 
     /**
@@ -101,6 +101,6 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      */
     public function valid(): bool
     {
-        return key($this->countriesByCountryCode) !== null;
+        return \key($this->countriesByCountryCode) !== null;
     }
 }

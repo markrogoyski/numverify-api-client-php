@@ -32,7 +32,7 @@ readonly class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializab
     {
         $this->verifyPhoneNumberData($validatedPhoneNumberData);
 
-        $this->valid               = boolval($validatedPhoneNumberData->valid);
+        $this->valid               = \boolval($validatedPhoneNumberData->valid);
         $this->number              = (string) $validatedPhoneNumberData->number;               // @phpstan-ignore cast.string
         $this->localFormat         = (string) $validatedPhoneNumberData->local_format;         // @phpstan-ignore cast.string
         $this->internationalFormat = (string) $validatedPhoneNumberData->international_format; // @phpstan-ignore cast.string

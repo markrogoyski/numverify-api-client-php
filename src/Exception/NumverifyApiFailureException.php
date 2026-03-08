@@ -56,13 +56,13 @@ class NumverifyApiFailureException extends \RuntimeException
     private function parseMessageFromBody(string $jsonBody): string
     {
         /** @var object{error?: object{type: string, code: int, info: string}}|null $body */
-        $body = json_decode($jsonBody);
+        $body = \json_decode($jsonBody);
 
         if (!isset($body->error)) {
             return 'Unknown error - ' . $this->statusCode . ' ' . $this->getReasonPhrase();
         }
 
         $error = $body->error;
-        return sprintf('Type:%s Code:%d Info:%s', $error->type, $error->code, $error->info);
+        return \sprintf('Type:%s Code:%d Info:%s', $error->type, $error->code, $error->info);
     }
 }

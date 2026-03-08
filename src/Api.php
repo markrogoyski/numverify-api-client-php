@@ -46,7 +46,7 @@ class Api
             'access_key' => $this->accessKey,
             'number'     => $phoneNumber,
         ];
-        if (strlen($countryCode) > 0) {
+        if (\strlen($countryCode) > 0) {
             $query['country_code'] = $countryCode;
         }
 
@@ -60,7 +60,7 @@ class Api
         $this->validateResponse($result);
 
         /** @var \stdClass $body */
-        $body = json_decode((string) $result->getBody());
+        $body = \json_decode((string) $result->getBody());
         return PhoneNumber\Factory::create($body);
     }
 
@@ -83,14 +83,14 @@ class Api
         $this->validateResponse($result);
 
         /** @var array<string, array{country_name: string, dialling_code: string}> $body */
-        $body = json_decode((string) $result->getBody(), true);
+        $body = \json_decode((string) $result->getBody(), true);
 
-        $countries = array_map(
+        $countries = \array_map(
             function (array $country, string $countryCode): Country\Country {
                 return new Country\Country($countryCode, $country['country_name'], $country['dialling_code']);
             },
             $body,
-            array_keys($body)
+            \array_keys($body)
         );
         return new Country\Collection(...$countries);
     }
@@ -118,7 +118,7 @@ class Api
         }
 
         /** @var \stdClass|null $body */
-        $body = json_decode((string) $response->getBody());
+        $body = \json_decode((string) $response->getBody());
         if (isset($body->success) && $body->success === false) {
             throw new NumverifyApiFailureException($response);
         }

@@ -49,10 +49,10 @@ class CountryTest extends \PHPUnit\Framework\TestCase
         $country = new Country(self::COUNTRY_CODE, self::COUNTRY_NAME, self::DIALLING_CODE);
 
         // When
-        $json = json_encode($country);
+        $json = \json_encode($country);
 
         // Then
-        $object = json_decode($json);
+        $object = \json_decode($json);
         $this->assertSame(self::COUNTRY_CODE, $object->countryCode);
         $this->assertSame(self::COUNTRY_NAME, $object->countryName);
         $this->assertSame(self::DIALLING_CODE, $object->diallingCode);

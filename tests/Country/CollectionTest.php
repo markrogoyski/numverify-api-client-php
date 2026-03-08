@@ -101,13 +101,13 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
         $collection = new Collection(...[$this->countryUs, $this->countryGb, $this->countryJp]);
 
         // When
-        $json = json_encode($collection);
+        $json = \json_encode($collection);
 
         // Then
-        $object = json_decode($json);
-        $this->assertTrue(property_exists($object, 'US'));
-        $this->assertTrue(property_exists($object, 'GB'));
-        $this->assertTrue(property_exists($object, 'JP'));
+        $object = \json_decode($json);
+        $this->assertTrue(\property_exists($object, 'US'));
+        $this->assertTrue(\property_exists($object, 'GB'));
+        $this->assertTrue(\property_exists($object, 'JP'));
 
         // And
         $this->assertEquals('US', $object->US->countryCode);

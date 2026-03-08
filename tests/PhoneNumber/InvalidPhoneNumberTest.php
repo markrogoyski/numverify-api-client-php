@@ -61,10 +61,10 @@ class InvalidPhoneNumberTest extends \PHPUnit\Framework\TestCase
         $phoneNumber = new InvalidPhoneNumber($this->validatedPhoneNumberData);
 
         // When
-        $json = json_encode($phoneNumber);
+        $json = \json_encode($phoneNumber);
 
         // Then
-        $object = json_decode($json);
+        $object = \json_decode($json);
         $this->assertSame(self::VALID, $object->valid);
         $this->assertSame(self::NUMBER, $object->number);
     }
@@ -78,7 +78,7 @@ class InvalidPhoneNumberTest extends \PHPUnit\Framework\TestCase
         $phoneNumber = new InvalidPhoneNumber($this->validatedPhoneNumberData);
 
         // When
-        $debugInfo = print_r($phoneNumber, true);
+        $debugInfo = \print_r($phoneNumber, true);
 
         // Then
         $this->assertStringContainsString('valid', $debugInfo);

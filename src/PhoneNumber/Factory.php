@@ -13,7 +13,7 @@ class Factory
      */
     public static function create(\stdClass $validatedPhoneNumber): PhoneNumberInterface
     {
-        return match (boolval($validatedPhoneNumber->valid)) {
+        return match (\boolval($validatedPhoneNumber->valid)) {
             true  => new ValidPhoneNumber($validatedPhoneNumber),
             false => new InvalidPhoneNumber($validatedPhoneNumber),
         };

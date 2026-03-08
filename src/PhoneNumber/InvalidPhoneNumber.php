@@ -22,7 +22,7 @@ readonly class InvalidPhoneNumber implements PhoneNumberInterface, \JsonSerializ
     {
         $this->verifyPhoneNumberData($validatedPhoneNumber);
 
-        $this->valid  = boolval($validatedPhoneNumber->valid);
+        $this->valid  = \boolval($validatedPhoneNumber->valid);
         $this->number = (string) $validatedPhoneNumber->number; // @phpstan-ignore cast.string
     }
 
