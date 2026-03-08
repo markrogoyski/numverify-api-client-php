@@ -54,15 +54,15 @@ class ValidPhoneNumber implements PhoneNumberInterface, \JsonSerializable
         $this->verifyPhoneNumberData($validatedPhoneNumberData);
 
         $this->valid               = boolval($validatedPhoneNumberData->valid);
-        $this->number              = $validatedPhoneNumberData->number;
-        $this->localFormat         = $validatedPhoneNumberData->local_format;
-        $this->internationalFormat = $validatedPhoneNumberData->international_format;
-        $this->countryPrefix       = $validatedPhoneNumberData->country_prefix;
-        $this->countryCode         = $validatedPhoneNumberData->country_code;
-        $this->countryName         = $validatedPhoneNumberData->country_name;
-        $this->location            = $validatedPhoneNumberData->location;
-        $this->carrier             = $validatedPhoneNumberData->carrier;
-        $this->lineType            = $validatedPhoneNumberData->line_type;
+        $this->number              = (string) $validatedPhoneNumberData->number;              // @phpstan-ignore cast.string
+        $this->localFormat         = (string) $validatedPhoneNumberData->local_format;         // @phpstan-ignore cast.string
+        $this->internationalFormat = (string) $validatedPhoneNumberData->international_format; // @phpstan-ignore cast.string
+        $this->countryPrefix       = (string) $validatedPhoneNumberData->country_prefix;       // @phpstan-ignore cast.string
+        $this->countryCode         = (string) $validatedPhoneNumberData->country_code;         // @phpstan-ignore cast.string
+        $this->countryName         = (string) $validatedPhoneNumberData->country_name;         // @phpstan-ignore cast.string
+        $this->location            = (string) $validatedPhoneNumberData->location;             // @phpstan-ignore cast.string
+        $this->carrier             = (string) $validatedPhoneNumberData->carrier;              // @phpstan-ignore cast.string
+        $this->lineType            = (string) $validatedPhoneNumberData->line_type;            // @phpstan-ignore cast.string
     }
 
     /**

@@ -23,7 +23,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $api = new Numverify\Api(self::ACCESS_KEY, $useHttps);
 
         // Then
-        $this->doesNotPerformAssertions();
+        $this->expectNotToPerformAssertions();
     }
 
     /* ************* *
@@ -33,7 +33,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function dataProviderForHttp(): array
+    public static function dataProviderForHttp(): array
     {
         return [
             [true],

@@ -99,7 +99,7 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
      *
      * @return int|string|null
      */
-    public function key()
+    public function key(): mixed
     {
         return key($this->countriesByCountryCode);
     }

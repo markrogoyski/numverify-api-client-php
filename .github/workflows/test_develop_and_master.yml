@@ -7,33 +7,58 @@ on:
       - master
 
 jobs:
-  test-and-static-analysis:
-    name: Test and Static Analysis
+  unit-tests:
+    name: Unit Tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.2', '7.3', '7.4', '8.0']
+        php: ['8.2', '8.3', '8.4', '8.5']
 
     steps:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          coverage: xdebug
           tools: composer:v2
 
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: PHP Version Check
         run: php -v
+
+      - name: Validate Composer JSON
+        run: COMPOSER=composer-test.json composer validate --no-check-lock --strict
+
+      - name: Run Composer
+        run: COMPOSER=composer-test.json composer install --no-interaction
+
+      - name: PHP Lint
+        run: ./vendor/bin/parallel-lint src tests
+
+      - name: Unit tests
+        run: |
+          mkdir -p build/logs
+          ./vendor/bin/phpunit --version
+          ./vendor/bin/phpunit --configuration tests/phpunit.xml
+
+  static-analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          tools: composer:v2
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Validate Composer JSON
         run: composer validate
@@ -44,15 +69,52 @@ jobs:
       - name: PHP Lint
         run: ./vendor/bin/parallel-lint src tests
 
+      - name: PHP Code Sniffer
+        run: |
+          ./vendor/bin/phpcs --version
+          ./vendor/bin/phpcs --ignore=vendor --standard=tools/coding_standard.xml -s .
+
+      - name: PHP Stan
+        run: |
+          ./vendor/bin/phpstan --version
+          ./vendor/bin/phpstan analyze -c tools/phpstan.neon
+
+      - name: Psalm
+        run: ./vendor/bin/psalm --config=tools/psalm.xml
+
+      - name: Composer Unused
+        run: ./vendor/bin/composer-unused
+
+      - name: Composer Require Checker
+        run: ./vendor/bin/composer-require-checker check
+
+      - name: Composer Audit
+        run: composer audit
+
+  code-coverage:
+    name: Code Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: xdebug
+          tools: composer:v2
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Composer
+        run: composer install --no-interaction
+
       - name: Unit tests
         run: |
           mkdir -p build/logs
-          ./vendor/bin/phpunit --version
           ./vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-clover build/logs/clover.xml
-          ls -alh build/logs
-
-      - name: PHP Code Sniffer
-        run: ./vendor/bin/phpcs --ignore=vendor --standard=tests/coding_standard.xml -s .
 
       - name: Code Coverage (Coveralls)
         env:

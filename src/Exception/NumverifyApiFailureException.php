@@ -27,7 +27,7 @@ class NumverifyApiFailureException extends \RuntimeException
         $this->reasonPhrase = $response->getReasonPhrase();
         $this->body         = $response->getBody();
 
-        $message = $this->parseMessageFromBody($this->body);
+        $message = $this->parseMessageFromBody((string) $this->body);
 
         parent::__construct($message);
     }
@@ -75,6 +75,7 @@ class NumverifyApiFailureException extends \RuntimeException
      */
     private function parseMessageFromBody(string $jsonBody): string
     {
+        /** @var object{error?: object{type: string, code: int, info: string}}|null $body */
         $body = json_decode($jsonBody);
 
         if (!isset($body->error)) {

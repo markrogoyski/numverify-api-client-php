@@ -2,6 +2,7 @@
 
 namespace Numverify\Tests\PhoneNumber;
 
+use GuzzleHttp\Psr7\Utils;
 use Numverify\Exception\NumverifyApiFailureException;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -64,6 +65,6 @@ class NumverifyApiFailureExceptionTest extends \PHPUnit\Framework\TestCase
         $this->response = $this->getMockBuilder(\Psr\Http\Message\ResponseInterface::class)->getMock();
         $this->response->method('getStatusCode')->willReturn(self::STATUS_CODE);
         $this->response->method('getReasonPhrase')->willReturn(self::REASON_PHRASE);
-        $this->response->method('getBody')->willReturn(self::BODY);
+        $this->response->method('getBody')->willReturn(Utils::streamFor(self::BODY));
     }
 }

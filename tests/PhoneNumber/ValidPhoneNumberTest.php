@@ -137,7 +137,7 @@ class ValidPhoneNumberTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
-    public function dataProviderForFields(): array
+    public static function dataProviderForFields(): array
     {
         return [
             ['valid'],

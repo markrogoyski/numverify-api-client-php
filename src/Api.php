@@ -30,7 +30,7 @@ class Api
      * @param bool                             $useHttps   Optional flag to determine if API calls should use http or https
      * @param \GuzzleHttp\ClientInterface|null $guzzle     Optional parameter to provide your own Guzzle client
      */
-    public function __construct(string $accessKey, bool $useHttps = false, \GuzzleHttp\ClientInterface $guzzle = null)
+    public function __construct(string $accessKey, bool $useHttps = false, ?\GuzzleHttp\ClientInterface $guzzle = null)
     {
         $this->accessKey = $accessKey;
         $this->client    = $guzzle ?? new \GuzzleHttp\Client(['base_uri' => $this->getUrl($useHttps)]);
@@ -65,7 +65,8 @@ class Api
         );
         $this->validateResponse($result);
 
-        $body = json_decode($result->getBody());
+        /** @var \stdClass $body */
+        $body = json_decode((string) $result->getBody());
         return PhoneNumber\Factory::create($body);
     }
 
@@ -89,10 +90,11 @@ class Api
         );
         $this->validateResponse($result);
 
-        $body = json_decode($result->getBody(), true);
+        /** @var array<string, array{country_name: string, dialling_code: string}> $body */
+        $body = json_decode((string) $result->getBody(), true);
 
         $countries = array_map(
-            function (array $country, string $countryCode) {
+            function (array $country, string $countryCode): Country\Country {
                 return new Country\Country($countryCode, $country['country_name'], $country['dialling_code']);
             },
             $body,
@@ -128,7 +130,8 @@ class Api
             throw new NumverifyApiFailureException($response);
         }
 
-        $body = json_decode($response->getBody());
+        /** @var \stdClass|null $body */
+        $body = json_decode((string) $response->getBody());
         if (isset($body->success) && $body->success == false) {
             throw new NumverifyApiFailureException($response);
         }

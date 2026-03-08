@@ -7,7 +7,7 @@ namespace Numverify\Exception;
  */
 class NumverifyApiResponseException extends \RuntimeException
 {
-    /** @var \stdClass */
+    /** @var \stdClass @phpstan-ignore property.onlyWritten */
     private $phoneNumberData;
 
     /**
