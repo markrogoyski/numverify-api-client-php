@@ -2,11 +2,6 @@
 
 namespace Numverify;
 
-use Numverify\Country;
-use Numverify\Exception\NumverifyApiFailureException;
-use Numverify\PhoneNumber;
-use Numverify\PhoneNumber\PhoneNumberInterface;
-
 /**
  * Numverify API
  *  - validatePhoneNumber
@@ -36,11 +31,11 @@ class Api
     /**
      * Validate a phone number
      *
-     * @return PhoneNumberInterface|PhoneNumber\ValidPhoneNumber|PhoneNumber\InvalidPhoneNumber
+     * @return PhoneNumber\PhoneNumberInterface
      *
      * @throws \RuntimeException
      */
-    public function validatePhoneNumber(string $phoneNumber, string $countryCode = ''): PhoneNumberInterface
+    public function validatePhoneNumber(string $phoneNumber, string $countryCode = ''): PhoneNumber\PhoneNumberInterface
     {
         $query = [
             'access_key' => $this->accessKey,
@@ -109,18 +104,18 @@ class Api
     /**
      * Validate the response
      *
-     * @throws NumverifyApiFailureException if the response is non 200 or success field is false
+     * @throws Exception\NumverifyApiFailureException if the response is non 200 or success field is false
      */
     private function validateResponse(\Psr\Http\Message\ResponseInterface $response): void
     {
         if ($response->getStatusCode() !== 200) {
-            throw new NumverifyApiFailureException($response);
+            throw new Exception\NumverifyApiFailureException($response);
         }
 
         /** @var \stdClass|null $body */
         $body = \json_decode((string) $response->getBody());
         if (isset($body->success) && $body->success === false) {
-            throw new NumverifyApiFailureException($response);
+            throw new Exception\NumverifyApiFailureException($response);
         }
     }
 }
