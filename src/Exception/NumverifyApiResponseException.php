@@ -7,19 +7,13 @@ namespace Numverify\Exception;
  */
 class NumverifyApiResponseException extends \RuntimeException
 {
-    /** @var \stdClass @phpstan-ignore property.onlyWritten */
-    private $phoneNumberData;
-
     /**
      * NumverifyApiResponseException constructor
      *
-     * @param string    $message
-     * @param \stdClass $phoneNumberData
+     * @phpstan-ignore property.onlyWritten
      */
-    public function __construct(string $message, \stdClass $phoneNumberData)
+    public function __construct(string $message, private readonly \stdClass $phoneNumberData)
     {
-        $this->phoneNumberData = $phoneNumberData;
-
         parent::__construct($message);
     }
 }

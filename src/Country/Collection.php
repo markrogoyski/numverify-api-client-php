@@ -10,15 +10,13 @@ namespace Numverify\Country;
 class Collection implements \Iterator, \Countable, \JsonSerializable
 {
     /** @var Country[] */
-    private $countriesByCountryCode = [];
+    private array $countriesByCountryCode = [];
 
     /** @var Country[] */
-    private $countriesByName = [];
+    private array $countriesByName = [];
 
     /**
      * Collection constructor
-     *
-     * @param Country ...$countries
      */
     public function __construct(Country ...$countries)
     {
@@ -30,10 +28,6 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
 
     /**
      * Find country by country code
-     *
-     * @param string $countryCode
-     *
-     * @return Country|null
      */
     public function findByCountryCode(string $countryCode): ?Country
     {
@@ -42,10 +36,6 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
 
     /**
      * Find country by name
-     *
-     * @param string $countryName
-     *
-     * @return Country|null
      */
     public function findByCountryName(string $countryName): ?Country
     {
@@ -54,8 +44,6 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
 
     /**
      * Countable interface
-     *
-     * @return int
      */
     public function count(): int
     {
@@ -82,8 +70,6 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
 
     /**
      * Iterator interface
-     *
-     * @return Country
      */
     public function current(): Country
     {
@@ -96,8 +82,6 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
 
     /**
      * Iterator interface
-     *
-     * @return int|string|null
      */
     public function key(): mixed
     {
@@ -114,8 +98,6 @@ class Collection implements \Iterator, \Countable, \JsonSerializable
 
     /**
      * Iterator interface
-     *
-     * @return bool
      */
     public function valid(): bool
     {

@@ -15,13 +15,10 @@ use Numverify\PhoneNumber\PhoneNumberInterface;
 class Api
 {
     private const HTTP_URL  = 'http://apilayer.net/api';
-    private const HTTPS_URL = 'http://apilayer.net/api';
+    private const HTTPS_URL = 'https://apilayer.net/api';
 
-    /** @var string API access key */
-    private $accessKey;
-
-    /** @var \GuzzleHttp\ClientInterface */
-    private $client;
+    private string $accessKey;
+    private \GuzzleHttp\ClientInterface $client;
 
     /**
      * Api constructor
@@ -38,9 +35,6 @@ class Api
 
     /**
      * Validate a phone number
-     *
-     * @param string $phoneNumber
-     * @param string $countryCode (Optional) Use to provide a phone number in a local format (non E.164)
      *
      * @return PhoneNumberInterface|PhoneNumber\ValidPhoneNumber|PhoneNumber\InvalidPhoneNumber
      *
@@ -73,8 +67,6 @@ class Api
     /**
      * Get list of countries
      *
-     * @return Country\Collection
-     *
      * @throws \RuntimeException
      */
     public function getCountries(): Country\Collection
@@ -105,22 +97,17 @@ class Api
 
     /**
      * Get the URL to use for API calls
-     *
-     * @param bool $useHttp
-     *
-     * @return string
      */
     private function getUrl(bool $useHttp): string
     {
-        return $useHttp
-            ? self::HTTPS_URL
-            : self::HTTP_URL;
+        return match ($useHttp) {
+            true  => self::HTTPS_URL,
+            false => self::HTTP_URL,
+        };
     }
 
     /**
      * Validate the response
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
      *
      * @throws NumverifyApiFailureException if the response is non 200 or success field is false
      */
@@ -132,7 +119,7 @@ class Api
 
         /** @var \stdClass|null $body */
         $body = json_decode((string) $response->getBody());
-        if (isset($body->success) && $body->success == false) {
+        if (isset($body->success) && $body->success === false) {
             throw new NumverifyApiFailureException($response);
         }
     }

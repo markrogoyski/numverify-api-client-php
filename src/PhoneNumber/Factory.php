@@ -4,23 +4,18 @@ namespace Numverify\PhoneNumber;
 
 /**
  * PhoneNumber Factory
- * Role: Factory class to create the appropriate [p;u,pr[joc PhoneNumber object
+ * Role: Factory class to create the appropriate PhoneNumber object
  */
 class Factory
 {
     /**
      * Factory creation method
-     *
-     * @param \stdClass $validatedPhoneNumber
-     *
-     * @return PhoneNumberInterface
      */
     public static function create(\stdClass $validatedPhoneNumber): PhoneNumberInterface
     {
-        if (boolval($validatedPhoneNumber->valid) === false) {
-            return new InvalidPhoneNumber($validatedPhoneNumber);
-        }
-
-        return new ValidPhoneNumber($validatedPhoneNumber);
+        return match (boolval($validatedPhoneNumber->valid)) {
+            true  => new ValidPhoneNumber($validatedPhoneNumber),
+            false => new InvalidPhoneNumber($validatedPhoneNumber),
+        };
     }
 }
