@@ -4,7 +4,9 @@ Numverify API Client Library for PHP
 Numverify phone number validation and country API client library for PHP.
 
 [![Coverage Status](https://coveralls.io/repos/github/markrogoyski/numverify-api-client-php/badge.svg?branch=master)](https://coveralls.io/github/markrogoyski/numverify-api-client-php?branch=master)
-[![License](https://poser.pugx.org/markrogoyski/math-php/license)](https://packagist.org/packages/markrogoyski/numverify-api-client-php)
+[![License](https://poser.pugx.org/markrogoyski/numverify-api-client-php/license)](https://packagist.org/packages/markrogoyski/numverify-api-client-php)
+[![Latest Stable Version](https://poser.pugx.org/markrogoyski/numverify-api-client-php/v)](https://packagist.org/packages/markrogoyski/numverify-api-client-php)
+[![Downloads](https://poser.pugx.org/markrogoyski/numverify-api-client-php/downloads)](https://packagist.org/packages/markrogoyski/numverify-api-client-php)
 
 Features
 --------
