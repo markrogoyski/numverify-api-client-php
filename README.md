@@ -30,7 +30,7 @@ Setup
 ```javascript
 {
   "require": {
-      "markrogoyski/numverify-api-client-php": "2.*"
+      "markrogoyski/numverify-api-client-php": "3.*"
   }
 }
 ```
@@ -38,7 +38,7 @@ Setup
 Use [composer](http://getcomposer.org) to install the library:
 
 ```bash
-$ php composer.phar install
+$ composer install
 ```
 
 Composer will install Numverify API Client Library for PHP inside your vendor folder. Then you can add the following to your
@@ -51,13 +51,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 Alternatively, use composer on the command line to require and install Numverify API Client Library:
 
 ```
-$ php composer.phar require markrogoyski/numverify-api-client-php:2.*
+$ composer require markrogoyski/numverify-api-client-php:3.*
 ```
 
 ### Minimum Requirements
- * PHP 7.2
- 
- Note: For PHP 7.0 and 7.1, use v1.0 (`require markrogoyski/numverify-api-client-php:1.*`)
+ * PHP 8.2
+    * (For PHP 7.2–8.1, use [v2.0](https://github.com/markrogoyski/numverify-api-client-php/releases/tag/v2.2.0))
+    * (For PHP 7.0–7.1, use [v1.0](https://github.com/markrogoyski/numverify-api-client-php/releases/tag/v1.0.0))
 
 Usage
 -----
